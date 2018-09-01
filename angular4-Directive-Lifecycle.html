@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angular," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="angular 指令(Directive)组件(Component)的关系: - Component 继承(extends) Directive - (组价) Component 是 (指令)Directive 的组成部分 1234567891011121314151617181920212223export interface Directive &amp;#123;   selector?: stri">
+<meta name="keywords" content="angular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular4 Directive Lifecycle">
+<meta property="og:url" content="https://zristart.github.io/angular4-Directive-Lifecycle.html">
+<meta property="og:site_name" content="那年匆匆-">
+<meta property="og:description" content="angular 指令(Directive)组件(Component)的关系: - Component 继承(extends) Directive - (组价) Component 是 (指令)Directive 的组成部分 1234567891011121314151617181920212223export interface Directive &amp;#123;   selector?: stri">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-18T09:09:43.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular4 Directive Lifecycle">
+<meta name="twitter:description" content="angular 指令(Directive)组件(Component)的关系: - Component 继承(extends) Directive - (组价) Component 是 (指令)Directive 的组成部分 1234567891011121314151617181920212223export interface Directive &amp;#123;   selector?: stri">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '94X7Y2Y1P8',
+      apiKey: 'f54df1573a554a6fb4c8a3fda838a644',
+      indexName: 'hexo-blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zristart.github.io/angular4-Directive-Lifecycle.html"/>
+
+
+
+
+
+  <title>angular4 Directive Lifecycle | 那年匆匆-</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">那年匆匆-</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/关于/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/标签/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zristart.github.io/angular4-Directive-Lifecycle.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="执念">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="那年匆匆-">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angular4 Directive Lifecycle</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-18T16:11:30+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>angular 指令(Directive)组件(Component)的关系:</p>
+<pre><code>- Component 继承(extends) Directive
+- (组价) Component 是 (指令)Directive 的组成部分
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export interface Directive &#123;</span><br><span class="line">   selector?: string;  // 用于定义组件在HTML代码中匹配的标签</span><br><span class="line">   inputs?: string[];  // 指令的输入属性</span><br><span class="line">   outputs?: string[];  // 指令的输出属性</span><br><span class="line">   host?: &#123;[key: string]: string&#125;;  // 绑定宿主的属性、事件等</span><br><span class="line">   providers?: Provider[];  // 设置指令及其子指令可以用的服务</span><br><span class="line">   exportAs?: string;  // 导出指令，使得可以在模板中调用</span><br><span class="line">   queries?: &#123;[key: string]: any&#125;;  // 设置指令的查询条件</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export interface Component extends Directive &#123;</span><br><span class="line">   changeDetection?: ChangeDetectionStrategy;  // 指定组件使用的变化检测策略</span><br><span class="line">   viewProviders?: Provider[];     // 设置组件及其子组件(不含ContentChildren)可以用的服务</span><br><span class="line">   moduleId?: string;  // 包含该组件模块的 id，它被用于解析 模版和样式的相对路径</span><br><span class="line">   templateUrl?: string;  // 为组件指定一个外部模板的URL地址</span><br><span class="line">   template?: string;  // 为组件指定一个内联的模板</span><br><span class="line">   styleUrls?: string[];  // 为组件指定一系列用于该组件的样式表文件</span><br><span class="line">   styles?: string[];  // 为组件指定内联样式</span><br><span class="line">   animations?: any[];  // 设置组件相关动画</span><br><span class="line">   encapsulation?: ViewEncapsulation;  // 设置组件视图包装选项</span><br><span class="line">   interpolation?: [string, string];  // 设置默认的插值运算符，默认是&quot;&#123;&#123;&quot;和&quot;&#125;&#125;&quot;</span><br><span class="line">   entryComponents?: Array&lt;Type&lt;any&gt;|any[]&gt;;  // 设置需要被提前编译的组件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>指令与组件共有的钩子</p>
+<ul>
+<li>ngOnChanges // 当数据绑定输入属性的值发生变化时调用 (1)</li>
+<li>ngOnInit // 在第一次 ngChanges 后调用 (2)</li>
+<li>ngDoCheck // 自定义的方法，用于检测和处理值的改变 (3)</li>
+<li>ngOnDestory // 指令销毁前调用 (8)</li>
+</ul>
+</li>
+<li><p>组件特有的钩子</p>
+<ul>
+<li>ngAfterContentInit // 在组件内容初始化之后调用 (4)</li>
+<li>ngAfterContentChecked // 组价每次检查内容时调用 (5)</li>
+<li>ngAfterViewInit // 组件相应的视图初始化之后调用 (6)</li>
+<li>ngAfterViewChecked // 组件每次检查视图时调用 (7)</li>
+</ul>
+</li>
+</ul>
+<p>constructor 构造函数</p>
+<pre><code>组件的生命周期函数会在所有生命周期钩子调用之前调用， 一般初始化数据，或者依赖注入用.
+</code></pre><p>ngOnChanges</p>
+<pre><code>当数据绑定输入属性的值发生改变时，Angular会主动调用ngOnChanges方法, 他会获得一个SimpleChanges对象，
+包含绑定的旧值新值，用于检测组件的输入属性的变化.
+</code></pre><p>ngOnInit(只会被调用一次)</p>
+<pre><code>在ngOnChanges执行之后，会调用ngOnInit， 执行组件的其他操作或获取组件输入属性的值。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component, OnInit &#125; from &apos;@angular/core&apos;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &apos;my-app&apos;,</span><br><span class="line">  template: `</span><br><span class="line">    &lt;h1&gt;Welcome to Angular World&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;Hello &#123;&#123;name&#125;&#125;&lt;/p&gt;</span><br><span class="line">  `,</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  name: string = &apos;&apos;;</span><br><span class="line"></span><br><span class="line">  constructor() &#123;</span><br><span class="line">    console.log(&apos;Constructor initialization&apos;);</span><br><span class="line">    this.name = &apos;Semlinker&apos;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit() &#123;</span><br><span class="line">    console.log(&apos;ngOnInit hook has been called&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 输出的结果为:</span><br><span class="line">    Constructor initialization</span><br><span class="line">    ngOnInit hook has been called</span><br></pre></td></tr></table></figure>
+<p>ngOnDestory</p>
+<pre><code>在指令被销毁前调用，用于清理操作,比如: 清理定时器,移除事件监听、退订Observable等
+</code></pre><p>ngDoCheck</p>
+<pre><code>在组件的输入属性发生变化时触发，自定义我们的检测逻辑。它也可以用来加速我们变化检测的速度
+</code></pre><p>ngAfterContenInit</p>
+<pre><code>在组件使用 ng-content 指令的情况下，Angular 会在将外部内容放到视图后用
+它主要用于获取通过 @ContentChild 或 @ContentChildren 属性装饰器查询的内容视图元素
+</code></pre><p>ngAfterContentChecked</p>
+<pre><code>在组件使用 ng-content 指令的情况下，Angular 会在检测到外部内容的绑定或者每次变化的时候调用
+</code></pre><p>ngAfterViewInit</p>
+<pre><code>在组件相应的视图初始化之后调用，它主要用于获取通过 @ViewChild 或 @ViewChildren 属性装饰器查询的视图元素
+</code></pre><p>ngAfterViewChecked</p>
+<pre><code>组件每次检查视图时调用
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angular/" rel="tag"># angular</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/angular4-指令.html" rel="next" title="angular4 指令">
+                <i class="fa fa-chevron-left"></i> angular4 指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/angular2-VS-angular4-对比-特性、性能.html" rel="prev" title="angular2 VS angular4 对比: 特性、性能">
+                angular2 VS angular4 对比: 特性、性能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">执念</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">执念</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

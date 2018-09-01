@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angular," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Angular2是在2015年底发布的。接下来一起了解Angular2这个版本发布的原因以及如何将其添加到Web开发中。 这个Angular版本更加注重于开发移动应用程序，开发人员可以使用它创建跨平台的应用程序，在解决了移动应用程序（功能，加载时间等）的挑战后，Angular2可以更容易的处理桌面组件。 许多模块被淘汰出了Angular核心，这也促使Angular2具备更好的性能。Angular走">
+<meta name="keywords" content="angular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular2 VS angular4 对比: 特性、性能">
+<meta property="og:url" content="https://zristart.github.io/angular2-VS-angular4-对比-特性、性能.html">
+<meta property="og:site_name" content="那年匆匆-">
+<meta property="og:description" content="Angular2是在2015年底发布的。接下来一起了解Angular2这个版本发布的原因以及如何将其添加到Web开发中。 这个Angular版本更加注重于开发移动应用程序，开发人员可以使用它创建跨平台的应用程序，在解决了移动应用程序（功能，加载时间等）的挑战后，Angular2可以更容易的处理桌面组件。 许多模块被淘汰出了Angular核心，这也促使Angular2具备更好的性能。Angular走">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-18T09:05:12.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular2 VS angular4 对比: 特性、性能">
+<meta name="twitter:description" content="Angular2是在2015年底发布的。接下来一起了解Angular2这个版本发布的原因以及如何将其添加到Web开发中。 这个Angular版本更加注重于开发移动应用程序，开发人员可以使用它创建跨平台的应用程序，在解决了移动应用程序（功能，加载时间等）的挑战后，Angular2可以更容易的处理桌面组件。 许多模块被淘汰出了Angular核心，这也促使Angular2具备更好的性能。Angular走">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '94X7Y2Y1P8',
+      apiKey: 'f54df1573a554a6fb4c8a3fda838a644',
+      indexName: 'hexo-blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zristart.github.io/angular2-VS-angular4-对比-特性、性能.html"/>
+
+
+
+
+
+  <title>angular2 VS angular4 对比: 特性、性能 | 那年匆匆-</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">那年匆匆-</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/关于/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/标签/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zristart.github.io/angular2-VS-angular4-对比-特性、性能.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="执念">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="那年匆匆-">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angular2 VS angular4 对比: 特性、性能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-18T16:58:48+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Angular2是在2015年底发布的。接下来一起了解Angular2这个版本发布的原因以及如何将其添加到Web开发中。</p>
+<p>这个Angular版本更加注重于开发移动应用程序，开发人员可以使用它创建跨平台的应用程序，在解决了移动应用程序（功能，加载时间等）的挑战后，Angular2可以更容易的处理桌面组件。</p>
+<p>许多模块被淘汰出了Angular核心，这也促使Angular2具备更好的性能。Angular走向了不断增长的模块生态系统，这意味着开发者可以自由的选择所需的组件。</p>
+<p>Angular 2.0基于ES6标准和“evergreen”现代浏览器（可自动更新到最新版本的浏览器）。在这些浏览器上构建应用，意味着可以更容易的使用Angular进行开发和优化，从而允许开发人员更专注于公司业务实现的代码。</p>
+<p>Angular2 的特性和性能<br>AtScript是ES6的超集，用于帮助Angular2的开发。它由Traceur编译器（结合ES6）进行处理，然后生成ES5代码，并使用TypeScript语法创建运行时类型断言。但是，AtScript不是强制性的，开发人员仍然可以选择只使用纯JavaScript / ES5代码来构建Angular应用程序。</p>
+<p>提升依赖注入（DI）：<br>依赖注入（一种程序设计模式，可以通过依赖关系实现调用，而不需要生成）是一种Angular显著区别于其竞争对手的特性。依赖注入在模块化开发和元素隔离方面非常有帮助，但它的实现一直受到Angular 1.x的困扰。Angular2解决了这个问题，另外还添加了一些缺少的功能，如子注入以及生命周期/范围控制。</p>
+<p>注解：<br>AtScript提供了连接元数据和功能的工具。通过在DI库中提供基本信息（可以调用函数或创建类的实例来检查相关元数据），从而简化了对象实例的构建。通过提供注入注释，使得参数信息重写也变得简单。</p>
+<p>子注入：<br>子注入继承了其父级注入所有的专业服务，以及在子层次重写的能力。根据需要，在一定范围内，一些类型的对象可以被调用和机械的重写。</p>
+<p>实例范围：<br>增强的DI库是由实例范围控制器组成的，当与子注入器连同范围标识符一起使用时，会更加强大。</p>
+<p>动态载入：<br>这是之前的Angular版本均不具备的功能，Angular2包含了这个功能，即使在开发人员忙碌时，也能够添加新的指令或控件。</p>
+<p>模板：<br>在Angular2中，模板编译过程是异步的。由于代码依赖于ES6模块，因此模块加载程序将通过在部分组件上引用它们，来加载依赖关系。</p>
+<p>指令：<br>Angular2提供了三种指令：</p>
+<p>组件指令：通过将逻辑封装在HTML，CSS和JavaScript中，从而使得组件可复用。<br>装饰器指令：可用于装饰元素（例如，通过隐藏/显示元素ng-hide/ng-show或添加工具提示）。<br>模板指令：可以将HTML转换为可复用的模板。该模板的实例化以及插入到DOM过程可以完全由指令创建者控制。例如ng-repeat和ng-if。</p>
+<p>子路由<br>子路由将通过提供自身的路由功能，将程序的每个部分转换为更紧密的应用程序，这有助于整个程序功能集合的封装。</p>
+<p>Screen Activator：<br>通过Angular 2，开发人员可以通过一系列can *回调对导航生命周期进行更好的控制。</p>
+<p>canActivate：它允许或阻止导航到新的控件。<br>激活：它会响应导航到新控件的成功事件。<br>canDeactivate：它将防止或允许跳出旧控制器的导航。<br>停用：它会响应跳出旧控制器的成功事件。</p>
+<p>设计：<br>所有这些逻辑都是使用管道架构创建的，这使得将自己的操作添加到管道中或删除默认操作变得非常简单。此外，它的异步字符允许开发人员在管道中，实现对用户进行身份验证或加载控件信息的服务器请求。</p>
+<p>记录：<br>Angular 2.0包括一个名为diary.js的日志记录服务，这是一个非常有用的属性，用于测量开发人员的编码投入时间（从而允许开发人员识别代码中的瓶颈）。</p>
+<p>scope：<br>$scope 从Angular2中删除了。</p>
+<p>Angular4</p>
+<p>Angular4 的特性和性能<br>相比于Angular 2，Angular4的功能列表中添加了许多新功能，同时还有一些旧功能的改进。</p>
+<p>更小更快：<br>使用Angular4，程序将会消耗更少的空间，并比以前的版本运行地更快。工作主要用于不断进行改进。</p>
+<p>视图引擎：<br>Angular4的开发人员修改了视图引擎的代码，例如AOT创建的代码。这些修改促使视图部分生成的代码大小减少了大约60％。模板越是复杂，节省的就越多。</p>
+<p>动画包：<br>Angular4的开发人员将动画从Angular的核心部分提取出来，并将它们放在独立的包中。这意味着如果开发人员不需要使用动画，就可以不创建这些额外的代码。</p>
+<p>这个功能还能够帮助更方便的查找docs文件和使用自动完成功能。开发人员可以通过为@angular/platform-b​​rowser/animations引入浏览器动画模块，从而实现为主要的NgModule添加动画功能。</p>
+<p>改进 <em>ngIf 和 </em>ngFor：<br>模板绑定语法目前支持一些少量有帮助的更改。现在，开发人员已经可以使用if/else设计​​语法，并分配局部变量了。</p>
+<p>Angular Universal：<br>此版本是Universal团队几个月的工作成果。这个Universal版本的代码的绝大多数目前位于@angular/platform-server。</p>
+<p>TypeScript 2.1和2.2兼容性：<br>Angular4开发组将Angular升级为更新版本的TypeScript。这将提高ngc的速度，方便开发人员将在编码过程中更好的进行类型检查。</p>
+<p>模板的源映射：<br>每当模板中的某些内容出现错误时，都将创建源映射，为原始模板提供有意义的说明内容。</p>
+<p>结论：<br>对于仍处于学习阶段的人来说，Angular会有点混乱。但对于具有Angular2知识的有经验的开发人员来说，会觉得Angular很容易使用，并且使用Angular对项目非常有帮助。</p>
+<p>原文地址: <a href="https://dzone.com/articles/angular-2-vs-angular-4-features-performance" target="_blank" rel="noopener">https://dzone.com/articles/angular-2-vs-angular-4-features-performance</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angular/" rel="tag"># angular</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/angular4-Directive-Lifecycle.html" rel="next" title="angular4 Directive Lifecycle">
+                <i class="fa fa-chevron-left"></i> angular4 Directive Lifecycle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/angular4中ngOnInit与contrutor的用法详解.html" rel="prev" title="angular4中ngOnInit与contrutor的用法详解">
+                angular4中ngOnInit与contrutor的用法详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">执念</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">执念</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
